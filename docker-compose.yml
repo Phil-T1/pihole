@@ -1,0 +1,17 @@
+# Pihole setup for DHCP server
+version: "3"
+
+services:
+  pihole:
+    image: pihole/pihole:latest
+    container_name: pihole
+    restart: unless-stopped
+    environment:
+      env_file: .env
+      WEBPASSWORD: "${WEBPASSWORD}"               # Set password in .env file
+    network_mode: host                            # For DHCP server (instead of ports)
+    volumes:
+      - './etc-pihole:/etc/pihole'
+      - './etc-dnsmasq.d:/etc/dnsmasq.d'
+    cap_add:
+      - NET_ADMIN                                 # Required for DHCP server
