@@ -1,8 +1,10 @@
 # Pihole setup for DHCP server
+# Pihole settings (in pihole API) for DNS must permit all origins
 
 version: "3"
 
 services:
+  
   pihole:
     image: pihole/pihole:latest
     container_name: pihole
@@ -10,7 +12,7 @@ services:
     environment:
       env_file: .env
       WEBPASSWORD: "${WEBPASSWORD}"               # Set password in .env file
-    network_mode: host                            # For DHCP server (instead of ports)
+    network_mode: host                            # For DHCP server (use host ports)
     volumes:
       - './etc-pihole:/etc/pihole'
       - './etc-dnsmasq.d:/etc/dnsmasq.d'
