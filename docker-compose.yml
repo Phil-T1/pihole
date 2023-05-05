@@ -1,5 +1,7 @@
 # Pihole setup for DHCP server
-# Pihole settings (in pihole API) for DNS must permit all origins
+# (1) Pihole settings (in pihole API) for DNS must permit all origins
+# (2) To DNS resolve host's hostname, container hostname cannot be the same as host's
+# (3) The first entry in the host's /etc/hosts must be [ip_address] [hostname] - not 127.0.0.1 etc.
 
 version: "3"
 
@@ -13,6 +15,7 @@ services:
       env_file: .env
       WEBPASSWORD: "${WEBPASSWORD}"               # Set password in .env file
     network_mode: host                            # For DHCP server (use host ports)
+    hostname: pihole                              # Change hostname to prevent conflict with host
     volumes:
       - './etc-pihole:/etc/pihole'
       - './etc-dnsmasq.d:/etc/dnsmasq.d'
