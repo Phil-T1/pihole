@@ -2,6 +2,7 @@
 # (1) Pihole settings (in pihole API) for DNS must permit all origins
 # (2) To DNS resolve host's hostname, container hostname cannot be the same as host's
 # (3) The first entry in the host's /etc/hosts must be [ip_address] [hostname] - not 127.0.0.1 etc.
+# (4) Set /etc/dhcpcd.conf static domain_name_servers=[ip_address] so the host machine can also use Pihole DNS
 
 version: "3"
 
